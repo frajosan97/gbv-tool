@@ -129,7 +129,7 @@ export default function SystemAdminDashboard(props: Props) {
         <>
             <Head title="System Dashboard" />
 
-            <div className="flex flex-1 flex-col gap-6 p-4 md:p-6">
+            <div className="flex flex-1 flex-col gap-3 p-4 md:p-6">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                     <div className="flex items-center gap-2">
                         <div className="rounded-lg bg-primary/10 p-2 text-primary">
@@ -182,7 +182,7 @@ export default function SystemAdminDashboard(props: Props) {
                 <StatsCards data={headline} cols={4} />
                 <StatsCards data={secondary} cols={4} />
 
-                <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+                <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
                     <div className="lg:col-span-2">
                         <Panel
                             title="12-Month Trend"
@@ -205,7 +205,7 @@ export default function SystemAdminDashboard(props: Props) {
                     </Panel>
                 </div>
 
-                <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+                <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
                     <Panel
                         title="Survivors by Gender"
                         description="Across filtered data."
@@ -238,7 +238,7 @@ export default function SystemAdminDashboard(props: Props) {
                     </Panel>
                 </div>
 
-                <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+                <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
                     <Panel
                         title="Top Incident Types"
                         description="Most common in filtered data."

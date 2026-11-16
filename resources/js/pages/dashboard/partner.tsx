@@ -89,7 +89,7 @@ export default function PartnerDashboard(props: Props) {
         <>
             <Head title="Partner Dashboard" />
 
-            <div className="flex flex-1 flex-col gap-6 p-4 md:p-6">
+            <div className="flex flex-1 flex-col gap-3 p-4 md:p-6">
                 {/* ---- Compact title row (mirrors system-admin.tsx) ---- */}
                 <div className="flex flex-wrap items-center justify-between gap-3">
                     <div className="flex items-center gap-2">
@@ -144,7 +144,7 @@ export default function PartnerDashboard(props: Props) {
 
                 <StatsCards data={cards} cols={4} />
 
-                <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+                <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
                     <div className="lg:col-span-2">
                         <Panel
                             title="Activity Over Time"
@@ -163,7 +163,7 @@ export default function PartnerDashboard(props: Props) {
                     </Panel>
                 </div>
 
-                <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+                <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
                     <Panel title="Survivors by Gender" delay={0.2}>
                         <DonutChart
                             data={props.survivorsByGender}

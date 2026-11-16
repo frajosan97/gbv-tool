@@ -103,7 +103,7 @@ export default function AdminDashboard(props: Props) {
         <>
             <Head title="Admin Dashboard" />
 
-            <div className="flex flex-1 flex-col gap-6 p-4 md:p-6">
+            <div className="flex flex-1 flex-col gap-3 p-4 md:p-6">
                 {/* ---- Compact title row (mirrors system-admin.tsx) ---- */}
                 <div className="flex flex-wrap items-center justify-between gap-3">
                     <div className="flex items-center gap-2">
@@ -160,7 +160,7 @@ export default function AdminDashboard(props: Props) {
 
                 <StatsCards data={cards} cols={4} />
 
-                <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+                <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
                     <div className="lg:col-span-2">
                         <Panel
                             title="12-Month Trend"
@@ -183,7 +183,7 @@ export default function AdminDashboard(props: Props) {
                     </Panel>
                 </div>
 
-                <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+                <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
                     <Panel title="Survivors by Gender" delay={0.2}>
                         <DonutChart
                             data={props.survivorsByGender}
@@ -214,7 +214,7 @@ export default function AdminDashboard(props: Props) {
                     </Panel>
                 </div>
 
-                <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+                <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
                     <Panel title="Top Incident Types" delay={0.35}>
                         <BarChart data={props.topIncidentTypes} />
                     </Panel>
