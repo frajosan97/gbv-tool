@@ -1,0 +1,9 @@
+packages:
+    - '.'
+
+minimumReleaseAgeExclude:
+    - framer-motion@14.14.0
+    - motion-dom@14.14.0
+
+publicHoistPattern:
+    - '@inertiajs/core'

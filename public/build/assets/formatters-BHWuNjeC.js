@@ -1,0 +1,1 @@
+function e(e){return e?new Date(e).toLocaleDateString(`en-GB`).replace(/\//g,`-`):`—`}export{e as t};
