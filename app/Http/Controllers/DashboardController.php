@@ -46,8 +46,8 @@ class DashboardController extends Controller
             );
         }
 
-        if ($actor->hasRole('System Admin') || $actor->isSuperAdmin()) {
-            return $this->systemAdmin($actor, $filters);
+        if ($actor->hasRole('Super Admin') || $actor->isSuperAdmin()) {
+            return $this->superAdmin($actor, $filters);
         }
         if ($actor->hasRole('Admin')) {
             return $this->admin($actor, $filters);
@@ -75,9 +75,9 @@ class DashboardController extends Controller
         ];
     }
 
-    private function systemAdmin(User $actor, DashboardFilters $f): Response
+    private function superAdmin(User $actor, DashboardFilters $f): Response
     {
-        return Inertia::render('dashboard/system-admin', [
+        return Inertia::render('dashboard/super-admin', [
             ...$this->basePayload($actor, $f),
             'system' => $this->metrics->systemSummary(),
             'partnersByType' => $this->metrics->partnersByType(),

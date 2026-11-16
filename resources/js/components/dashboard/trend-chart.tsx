@@ -43,8 +43,14 @@ export function TrendChart({ data, className }: TrendChartProps) {
         ...data.map((d) => Math.max(d.survivors, d.cases)),
     );
     const yTicks = 4;
-    const tickValues = Array.from({ length: yTicks + 1 }, (_, i) =>
-        Math.round((maxVal / yTicks) * i),
+
+    // ✅ dedupe ticks — prevents duplicate keys like [0, 1, 1, 1, 2]
+    const tickValues = Array.from(
+        new Set(
+            Array.from({ length: yTicks + 1 }, (_, i) =>
+                Math.round((maxVal / yTicks) * i),
+            ),
+        ),
     );
 
     const x = (i: number) =>
@@ -77,7 +83,7 @@ export function TrendChart({ data, className }: TrendChartProps) {
                     <defs>
                         {SERIES.map((s) => (
                             <linearGradient
-                                key={s.key}
+                                key={`grad-${s.key}`}
                                 id={`grad-${s.key}`}
                                 x1="0"
                                 x2="0"
@@ -98,9 +104,9 @@ export function TrendChart({ data, className }: TrendChartProps) {
                         ))}
                     </defs>
 
-                    {/* Grid + Y labels */}
-                    {tickValues.map((v, i) => (
-                        <g key={v}>
+                    {/* Grid + Y labels — ✅ prefixed key, deduped values */}
+                    {tickValues.map((v) => (
+                        <g key={`tick-${v}`}>
                             <line
                                 x1={P.left}
                                 x2={W - P.right}
@@ -149,9 +155,9 @@ export function TrendChart({ data, className }: TrendChartProps) {
                         />
                     ))}
 
-                    {/* Points + hover zones */}
+                    {/* Points + hover zones — ✅ prefixed, month-scoped keys */}
                     {data.map((d, i) => (
-                        <g key={i}>
+                        <g key={`pt-${d.month}-${i}`}>
                             <rect
                                 x={
                                     x(i) -
@@ -165,7 +171,7 @@ export function TrendChart({ data, className }: TrendChartProps) {
                             />
                             {SERIES.map((s) => (
                                 <circle
-                                    key={s.key}
+                                    key={`dot-${d.month}-${s.key}`}
                                     cx={x(i)}
                                     cy={y(d[s.key])}
                                     r={hovered === i ? 5 : 3.5}
@@ -178,11 +184,11 @@ export function TrendChart({ data, className }: TrendChartProps) {
                         </g>
                     ))}
 
-                    {/* Month labels */}
+                    {/* Month labels — ✅ prefixed, index-scoped */}
                     {data.map((d, i) =>
                         i % 2 === 0 ? (
                             <text
-                                key={d.month}
+                                key={`lbl-${d.month}-${i}`}
                                 x={x(i)}
                                 y={H - 10}
                                 textAnchor="middle"
@@ -207,7 +213,7 @@ export function TrendChart({ data, className }: TrendChartProps) {
                         </div>
                         {SERIES.map((s) => (
                             <div
-                                key={s.key}
+                                key={`tip-${s.key}`}
                                 className="flex items-center justify-between gap-3 py-0.5"
                             >
                                 <span className="flex items-center gap-1.5 text-muted-foreground">
@@ -230,7 +236,7 @@ export function TrendChart({ data, className }: TrendChartProps) {
             <div className="mt-3 flex flex-wrap items-center gap-5 text-xs">
                 {SERIES.map((s) => (
                     <span
-                        key={s.key}
+                        key={`legend-${s.key}`}
                         className="flex items-center gap-1.5 text-muted-foreground"
                     >
                         <span

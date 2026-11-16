@@ -56,7 +56,16 @@ export function DonutChart({
     const cx = size / 2;
     const cy = size / 2;
 
+    // Pre-compute cumulative offsets so both maps stay in sync
     let offset = 0;
+    const arcs = data.map((slice, i) => {
+        const fraction = slice.value / total;
+        const dash = fraction * C;
+        const color = slice.color ?? PALETTE[i % PALETTE.length];
+        const startOffset = offset;
+        offset += dash;
+        return { slice, i, dash, color, startOffset };
+    });
 
     return (
         <div
@@ -68,21 +77,15 @@ export function DonutChart({
             <div className="relative shrink-0">
                 <svg width={size} height={size} className="overflow-visible">
                     <g transform={`translate(${cx} ${cy}) rotate(-90)`}>
-                        {data.map((slice, i) => {
-                            const fraction = slice.value / total;
-                            const dash = fraction * C;
-                            const color =
-                                slice.color ?? PALETTE[i % PALETTE.length];
-                            const startOffset = offset;
-                            offset += dash;
-
+                        {arcs.map(({ slice, i, dash, color, startOffset }) => {
                             const isHovered = hovered === i;
                             const isDimmed = hovered !== null && hovered !== i;
                             const strokeWidth = thickness + (isHovered ? 6 : 0);
 
                             return (
                                 <motion.circle
-                                    key={slice.name}
+                                    // ✅ prefixed + indexed → unique even if names repeat
+                                    key={`arc-${slice.name}-${i}`}
                                     r={R}
                                     fill="transparent"
                                     stroke={color}
@@ -137,15 +140,15 @@ export function DonutChart({
             </div>
 
             <ul className="flex-1 space-y-1.5 text-xs">
-                {data.map((slice, i) => {
-                    const color = slice.color ?? PALETTE[i % PALETTE.length];
+                {arcs.map(({ slice, i, color }) => {
                     const pct = ((slice.value / total) * 100).toFixed(0);
                     const isHovered = hovered === i;
                     const isDimmed = hovered !== null && hovered !== i;
 
                     return (
                         <li
-                            key={slice.name}
+                            // ✅ different prefix from arcs → cannot collide with them
+                            key={`legend-${slice.name}-${i}`}
                             onMouseEnter={() => setHovered(i)}
                             onMouseLeave={() => setHovered(null)}
                             className={cn(
