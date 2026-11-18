@@ -15,6 +15,8 @@ void createInertiaApp({
         switch (true) {
             case name === "welcome":
                 return null;
+            case name === "resources":
+                return null;
             case name === "privacy-policy":
                 return null;
             case name === "terms-and-conditions":

@@ -35,7 +35,7 @@ export default function AuthCardLayout({
                     <AppLogo className="h-12 w-auto sm:h-14" />
                 </Link>
 
-                <Card className="rounded-2xl border-border bg-card/95 shadow-[0_8px_40px_rgb(0,0,0,0.06)] dark:shadow-black/40 backdrop-blur-xl">
+                <Card className="rounded-2xl border-none bg-card/95 shadow-[0_8px_40px_rgb(0,0,0,0.06)] dark:shadow-black/40 backdrop-blur-xl">
                     <CardHeader className="px-10 pt-8 pb-0 text-center">
                         <CardTitle className="text-xl font-extrabold tracking-tight">
                             {title}

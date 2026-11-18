@@ -96,15 +96,13 @@ export default function GuestHeader({ scrollToSection }: GuestHeaderProps) {
                                 />
                                 {t("home")}
                             </Link>
-                            <button
-                                onClick={() =>
-                                    scrollToSection("resources-banner")
-                                }
+                            <Link
+                                href="/resources"
                                 className={`${NAV_BTN_BASE} font-semibold text-muted-foreground hover:bg-secondary hover:text-foreground`}
                             >
                                 <BookOpen size={16} />
                                 {t("resources")}
-                            </button>
+                            </Link>
                             <button
                                 onClick={() =>
                                     scrollToSection("contact-footer")
@@ -218,15 +216,14 @@ export default function GuestHeader({ scrollToSection }: GuestHeaderProps) {
                             >
                                 <Home size={18} /> {t("home")}
                             </Link>
-                            <button
-                                onClick={() => {
-                                    setMobileMenuOpen(false);
-                                    scrollToSection("resources-banner");
-                                }}
+                            <Link
+                                href="/resources"
+                                onClick={() => setMobileMenuOpen(false)}
                                 className="flex items-center gap-3 rounded-lg px-4 py-3 font-medium text-muted-foreground hover:bg-secondary"
                             >
-                                <BookOpen size={18} /> {t("resources")}
-                            </button>
+                                <BookOpen size={18} />
+                                {t("resources")}
+                            </Link>
                             <button
                                 onClick={() => {
                                     setMobileMenuOpen(false);
